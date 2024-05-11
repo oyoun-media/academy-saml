@@ -94,7 +94,7 @@ class SamlSso implements SamlContract
         $assertion
             ->setId(Helper::generateID())
             ->setIssueInstant(new \DateTime())
-            ->setIssuer(new Issuer($this->issuer))
+            ->setIssuer(new Issuer(rtrim(config('app.url'), '/') . '/' . ltrim(config('samlidp.issuer_uri'), '/')))
             ->setSignature(new SignatureWriter($this->certificate, $this->private_key, $this->digest_algorithm))
             ->setSubject(
                 (new Subject())
