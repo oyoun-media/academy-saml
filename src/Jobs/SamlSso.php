@@ -83,7 +83,7 @@ class SamlSso implements SamlContract
     public function response()
     {
         $this->response = (new Response())
-            ->setIssuer(new Issuer($this->issuer))
+            ->setIssuer(new Issuer(rtrim(config('app.url'), '/') . '/' . ltrim(config('samlidp.issuer_uri'), '/')))
             ->setStatus(new Status(new StatusCode('urn:oasis:names:tc:SAML:2.0:status:Success')))
             ->setID(Helper::generateID())
             ->setIssueInstant(new \DateTime())
